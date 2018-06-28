@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react';
 import { Route } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
@@ -6,7 +6,7 @@ import './App.css'
 import Search from './Search'
 import Bookshelf from './Bookshelf'
 
-class BooksApp extends React.Component {
+class BooksApp extends Component {
   state = {
     books: []
   }
@@ -16,6 +16,28 @@ class BooksApp extends React.Component {
       this.setState({ books })
       console.log(books)
     })
+  }
+
+  updateBookshelf = (book, shelf) => {
+    // apply new shelf to book
+    book.shelf = shelf
+    // update state and api
+    if(shelf === 'none') {
+      this.setState((state) => ({
+        books: state.books.filter((b) => b.id !== book.id)
+      }))
+      BooksAPI.update(book, shelf)
+    } else if(shelf === 'currentlyReading' ||
+              shelf === 'wantToRead' ||
+              shelf === 'read') {
+      this.setState((state) => ({
+        books: state.books.filter((b) => b.id !== book.id).concat([book])
+      }))
+      BooksAPI.update(book, shelf)
+    } else {
+      console.log(`Error, ${shelf} shelf doesn't exist.`)
+    }
+    
   }
 
   render() {
@@ -29,7 +51,7 @@ class BooksApp extends React.Component {
                 </div>
                 <div className="list-books-content">
 
-                  <Bookshelf bookShelfBooks={this.state.books}/>
+                  <Bookshelf update={this.updateBookshelf} bookShelfBooks={this.state.books}/>
 
                 </div>
                 <div className="open-search">

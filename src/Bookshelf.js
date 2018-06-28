@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 class Bookshelf extends Component {
 
 	render() {
-		const { bookShelfBooks } = this.props
+		const { bookShelfBooks, update } = this.props
 		return (
 			<div>
 				<div className="bookshelf">
@@ -17,13 +17,15 @@ class Bookshelf extends Component {
 						          <div className="book-top">
 						            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url("${book.imageLinks.thumbnail}")` }}></div>
 						            <div className="book-shelf-changer">
-						              <select defaultValue={book.shelf}>
+
+						              <select value={book.shelf} onChange={(e) => update(book, e.target.value)}>
 						                <option value="move" disabled>Move to...</option>
 						                <option value="currentlyReading">Currently Reading</option>
 						                <option value="wantToRead">Want to Read</option>
 						                <option value="read">Read</option>
 						                <option value="none">None</option>
 						              </select>
+
 						            </div>
 						          </div>
 						          <div className="book-title">{book.title}</div>
@@ -47,13 +49,15 @@ class Bookshelf extends Component {
 						          <div className="book-top">
 						            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url("${book.imageLinks.thumbnail}")` }}></div>
 						            <div className="book-shelf-changer">
-						              <select defaultValue={book.shelf}>
+
+						              <select value={book.shelf} onChange={(e) => update(book, e.target.value)}>
 						                <option value="move" disabled>Move to...</option>
 						                <option value="currentlyReading">Currently Reading</option>
 						                <option value="wantToRead">Want to Read</option>
 						                <option value="read">Read</option>
 						                <option value="none">None</option>
 						              </select>
+
 						            </div>
 						          </div>
 						          <div className="book-title">{book.title}</div>
@@ -77,13 +81,15 @@ class Bookshelf extends Component {
 						          <div className="book-top">
 						            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url("${book.imageLinks.thumbnail}")` }}></div>
 						            <div className="book-shelf-changer">
-						              <select defaultValue={book.shelf}>
+
+						              <select value={book.shelf} onChange={(e) => update(book, e.target.value)}>
 						                <option value="move" disabled>Move to...</option>
 						                <option value="currentlyReading">Currently Reading</option>
 						                <option value="wantToRead">Want to Read</option>
 						                <option value="read">Read</option>
 						                <option value="none">None</option>
 						              </select>
+
 						            </div>
 						          </div>
 						          <div className="book-title">{book.title}</div>
