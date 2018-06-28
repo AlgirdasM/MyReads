@@ -9,17 +9,32 @@ class Search extends Component {
   }
 
   updateQuery = (query) => {
+    // update state
     this.setState({ query: query })
+    // get books from api
     if (query) {
-      BooksAPI.search(query).then((data) => {
-         this.setState({ apiBooks: data })
+      BooksAPI.search(query).then((response) => {
+
+        const bookShelfBooks = this.props.bookShelfBooks
+        
+        if (response.length > 0){
+          // add shelf value to books
+          response.map(book => {
+            // add to none shelf by default
+            book.shelf = 'none'
+            // if book is in our shelf, then update results
+            return bookShelfBooks.filter(b => b.id === book.id && (book.shelf = b.shelf))
+          })
+        }
+        // update apiBooks state
+        this.setState({ apiBooks: response })
       })
     }
-
   }
 
   render() {
     const { query, apiBooks } = this.state
+    const { update } = this.props
 
     return (
       <div className="search-books">
@@ -54,7 +69,7 @@ class Search extends Component {
                           <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url("${book.imageLinks.thumbnail}")` }}></div>
                           <div className="book-shelf-changer">
 
-                            <select>
+                            <select value={book.shelf} onChange={(e) => update(book, e.target.value)}>
                               <option value="move" disabled>Move to...</option>
                               <option value="currentlyReading">Currently Reading</option>
                               <option value="wantToRead">Want to Read</option>
