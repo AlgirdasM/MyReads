@@ -11,13 +11,13 @@ class Search extends Component {
   updateQuery = (query) => {
     // update state
     this.setState({ query: query })
-    // get books from api
-    if (query) {
-      BooksAPI.search(query.trim()).then((response) => {
 
+    // get books from api
+    if (query && query.trim().length > 0) {
+      BooksAPI.search(query.trim()).then((response) => {
         const bookShelfBooks = this.props.bookShelfBooks
-        
-        if (response && response.length > 0){
+        // handle response and error response
+        if (response && !response.error){
           // add shelf value to books
           response.map(book => {
             // add to none shelf by default
@@ -28,11 +28,17 @@ class Search extends Component {
           // update apiBooks state
           this.setState({ apiBooks: response })
         } else {
-          this.setState({ apiBooks: [] })
+          this.clearQuery()
         }
-
       })
+    } else {
+      this.clearQuery()
     }
+  }
+
+  clearQuery = () => {
+    console.log('clearing')
+    this.setState({ apiBooks: [] })
   }
 
   render() {
