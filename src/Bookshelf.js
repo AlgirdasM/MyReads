@@ -47,7 +47,7 @@ class Bookshelf extends Component {
 						      <li key={book.id}>
 						        <div className="book">
 						          <div className="book-top">
-						            <div className="book-cover" style={{ backgroundImage: `url("${book.imageLinks.thumbnail}")` }}></div>
+						            <div className="book-cover" style={ book.imageLinks && ({ backgroundImage: `url("${book.imageLinks.thumbnail}")` }) }></div>
 						            <div className="book-shelf-changer">
 
 						              <select value={book.shelf} onChange={(e) => update(book, e.target.value)}>
@@ -79,7 +79,7 @@ class Bookshelf extends Component {
 						      <li key={book.id}>
 						        <div className="book">
 						          <div className="book-top">
-						            <div className="book-cover" style={{ backgroundImage: `url("${book.imageLinks.thumbnail}")` }}></div>
+						            <div className="book-cover" style={ book.imageLinks && ({ backgroundImage: `url("${book.imageLinks.thumbnail}")` }) }></div>
 						            <div className="book-shelf-changer">
 
 						              <select value={book.shelf} onChange={(e) => update(book, e.target.value)}>
