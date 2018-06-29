@@ -13,11 +13,11 @@ class Search extends Component {
     this.setState({ query: query })
     // get books from api
     if (query) {
-      BooksAPI.search(query).then((response) => {
+      BooksAPI.search(query.trim()).then((response) => {
 
         const bookShelfBooks = this.props.bookShelfBooks
         
-        if (response.length > 0){
+        if (response && response.length > 0){
           // add shelf value to books
           response.map(book => {
             // add to none shelf by default
@@ -25,9 +25,12 @@ class Search extends Component {
             // if book is in our shelf, then update results
             return bookShelfBooks.filter(b => b.id === book.id && (book.shelf = b.shelf))
           })
+          // update apiBooks state
+          this.setState({ apiBooks: response })
+        } else {
+          this.setState({ apiBooks: [] })
         }
-        // update apiBooks state
-        this.setState({ apiBooks: response })
+
       })
     }
   }
