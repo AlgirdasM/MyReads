@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import { debounce } from 'throttle-debounce';
 import * as BooksAPI from './BooksAPI'
 
 class Search extends Component {
@@ -14,7 +15,16 @@ class Search extends Component {
 
     // get books from api
     if (query && query.trim().length > 0) {
-      BooksAPI.search(query.trim()).then((response) => {
+      this.searchApiBooks(query.trim())
+    } else {
+      this.clearQuery()
+    }
+  }
+
+  // search books using api, delay search for 500ms
+  searchApiBooks = debounce(500, (query) => {
+    // wait for last character, then search
+      BooksAPI.search(query).then((response) => {
         const bookShelfBooks = this.props.bookShelfBooks
         // handle response and error response
         if (response && !response.error){
@@ -31,10 +41,7 @@ class Search extends Component {
           this.clearQuery()
         }
       })
-    } else {
-      this.clearQuery()
-    }
-  }
+  })
 
   clearQuery = () => {
     console.log('clearing')
