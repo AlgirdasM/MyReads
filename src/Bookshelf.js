@@ -24,7 +24,7 @@ class Bookshelf extends Component {
 					  <div className="bookshelf-books">
 					    <ol className="books-grid">
 						    { bookShelfBooks.filter( book => book.shelf === shelf.id ).map( book =>
-							      <li key={ book.id }>
+							      <li className="animated fadeIn" key={ book.id }>
 							        <div className="book">
 							          <div className="book-top">
 							            <div className="book-cover" style={ book.imageLinks && ({ backgroundImage: `url("${ book.imageLinks.thumbnail }")` }) }></div>

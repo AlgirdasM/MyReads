@@ -78,7 +78,7 @@ class Search extends Component {
 
               { query && apiBooks.length > 0 && (
                   apiBooks.map( book =>
-                    <li key={ book.id }>
+                    <li className="animated fadeIn" key={ book.id }>
                       <div className="book">
                         <div className="book-top">
                           <div className="book-cover" style={ book.imageLinks && ({ backgroundImage: `url("${ book.imageLinks.thumbnail }")` }) }>

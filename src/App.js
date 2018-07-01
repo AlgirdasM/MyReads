@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 import './css/App.css'
+import './css/Animate.css'
 import Search from './Search'
 import Bookshelf from './Bookshelf'
 

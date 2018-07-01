@@ -20,3 +20,4 @@ The backend API uses a fixed set of cached search results and is limited to a pa
 * [React](https://reactjs.org/)
 * [React router](https://reacttraining.com/react-router/)
 * [throttle-debounce](https://www.npmjs.com/package/throttle-debounce)
+* [animate.css](http://daneden.me/animate)
