@@ -5,7 +5,7 @@ body {
   line-height: 1.5;
 }
 body, .app {
-  background: white;
+  background: #fff;
 }
 
 /* main page */
@@ -21,7 +21,7 @@ body, .app {
 .list-books-title h1 {
   font-weight: 400;
   margin: 0;
-  color: white;
+  color: #fff;
 }
 
 .list-books-content {
@@ -78,7 +78,7 @@ body, .app {
 }
 .search-books-input-wrapper {
   flex: 1;
-  background: #e9e;
+  background: #fff;
 }
 .search-books-bar input {
   width: 100%;
@@ -94,7 +94,7 @@ body, .app {
   left: 15px;
   width: 50px;
   height: 53px;
-  background: white;
+  background: #fff;
   background-image: url('./../icons/arrow-back.svg');
   background-position: center;
   background-repeat: no-repeat;
