@@ -6,24 +6,29 @@ import * as BooksAPI from './BooksAPI'
 class Search extends Component {
   state = {
     query: '',
-    apiBooks: []
+    apiBooks: [],
+    search: true
   };
 
   updateQuery = (query) => {
     // update state
     this.setState({ query: query });
 
-    // get books from api
+    
     if (query && query.trim().length > 0) {
-      this.searchApiBooks(query.trim());
+      this.setState({ search: true });
     } else {
-      this.clearQuery();
+      this.setState({ search: false });
     }
+    // get books from api
+    this.searchApiBooks(query.trim());
+
   };
 
   // search books using api, delay search for 500ms
   searchApiBooks = debounce(500, (query) => {
-    // wait for last character, then search
+    if(this.state.search) {
+      // wait for last character, then search
       BooksAPI.search(query).then((response) => {
         const bookShelfBooks = this.props.bookShelfBooks;
         // handle response and error response
@@ -38,12 +43,16 @@ class Search extends Component {
           // update apiBooks state
           this.setState({ apiBooks: response });
         } else {
-          this.clearQuery();
+          this.clearSearch();
         }
       });
+    } else {
+      // will ignore if there is no query and clear search results
+      this.clearSearch();
+    }
   });
 
-  clearQuery = () => {
+  clearSearch = () => {
     this.setState({ apiBooks: [] });
   };
 
