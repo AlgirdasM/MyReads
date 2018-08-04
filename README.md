@@ -9,6 +9,10 @@ MyReads app allows you to search and select books that you are currently reading
 2. Start the server with `npm start` and open your browser with given **Local** address
 
 
+## Visit project online
+[Click here to visit project online](https://my-reads.amfullstack.com/)
+
+
 ## Search page - Important
 The backend API uses a fixed set of cached search results and is limited to a particular set of search terms, which can be found in [SEARCH_TERMS.md](SEARCH_TERMS.md). That list of terms are the _only_ terms that will work with the backend, so don't be surprised if your searches for Basket Weaving or Bubble Wrap don't come back with any results.
 
